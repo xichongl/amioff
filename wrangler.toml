@@ -1,0 +1,8 @@
+name = "amioff"
+compatibility_date = "2024-09-01"
+pages_build_output_dir = "dist"
+
+[[kv_namespaces]]
+binding = "AMIOFF_DATA"
+id = "f0a9d89310964a36b2a23e69dcc5091c"
+

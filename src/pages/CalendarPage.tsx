@@ -8,16 +8,13 @@ import {
   Sparkles,
   UsersRound,
 } from 'lucide-react'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AvailabilityDialog } from '../components/AvailabilityDialog'
 import { PageHeader } from '../components/PageHeader'
+import { useAuth } from '../context/AuthContext'
+import { api } from '../lib/api'
 import { rankBestDates, summarizeDates } from '../lib/availability'
-import {
-  currentMemberId,
-  defaultGroupName,
-  initialMembers,
-} from '../lib/appDefaults'
 import {
   addMonthsToDateKey,
   buildCalendarMonths,
@@ -140,6 +137,9 @@ function BestDateCard({ summary, memberCount }: BestDateCardProps) {
 }
 
 export function CalendarPage() {
+  const { currentUser, members, groupName, isLoggedIn, openAuthModal } = useAuth()
+  const activeUserId = currentUser?.id || 'guest'
+
   const startDate = useMemo(() => todayInTimeZone(), [])
   const endDate = useMemo(() => addMonthsToDateKey(startDate, 3), [startDate])
   const dates = useMemo(
@@ -151,11 +151,33 @@ export function CalendarPage() {
     [startDate, endDate],
   )
   const [entries, setEntries] = useState<AvailabilityEntry[]>([])
-  const [selectedMemberIds, setSelectedMemberIds] = useState(() =>
-    initialMembers.map((member) => member.id),
-  )
+  const [selectedMemberIds, setSelectedMemberIds] = useState<string[]>([])
   const [weekendsOnly, setWeekendsOnly] = useState(false)
   const [editingDate, setEditingDate] = useState<string | null>(null)
+
+  useEffect(() => {
+    let isMounted = true
+    api.getAvailability()
+      .then((res) => {
+        if (isMounted && res.entries) {
+          setEntries(res.entries)
+        }
+      })
+      .catch((err) => console.warn('Could not fetch availability:', err))
+    return () => {
+      isMounted = false
+    }
+  }, [currentUser])
+
+  useEffect(() => {
+    if (members.length > 0) {
+      setSelectedMemberIds((prev) => {
+        const validIds = new Set(members.map((m) => m.id))
+        const existing = prev.filter((id) => validIds.has(id))
+        return existing.length > 0 ? existing : members.map((m) => m.id)
+      })
+    }
+  }, [members])
 
   const visibleDates = useMemo(
     () => (weekendsOnly ? dates.filter(isWeekend) : dates),
@@ -178,10 +200,10 @@ export function CalendarPage() {
     () =>
       new Map(
         entries
-          .filter((entry) => entry.memberId === currentMemberId)
+          .filter((entry) => entry.memberId === activeUserId)
           .map((entry) => [entry.date, entry]),
       ),
-    [entries],
+    [entries, activeUserId],
   )
 
   function setOwnEntry(
@@ -189,29 +211,55 @@ export function CalendarPage() {
     status: 'full' | 'partial',
     periods: AvailabilityPeriod[] = [],
   ) {
+    if (!isLoggedIn || !currentUser) {
+      openAuthModal('register')
+      return
+    }
+
     setEntries((current) => [
       ...current.filter(
-        (entry) => !(entry.memberId === currentMemberId && entry.date === date),
+        (entry) => !(entry.memberId === activeUserId && entry.date === date),
       ),
       {
-        memberId: currentMemberId,
+        memberId: activeUserId,
         date,
         status,
         periods,
         source: 'manual',
       },
     ])
+
+    api.saveAvailability({
+      date,
+      status,
+      periods,
+      source: 'manual',
+    }).catch((err) => console.error('Failed to persist availability:', err))
   }
 
   function clearOwnEntry(date: string) {
+    if (!isLoggedIn || !currentUser) {
+      openAuthModal('register')
+      return
+    }
+
     setEntries((current) =>
       current.filter(
-        (entry) => !(entry.memberId === currentMemberId && entry.date === date),
+        (entry) => !(entry.memberId === activeUserId && entry.date === date),
       ),
     )
+
+    api.saveAvailability({
+      date,
+      status: 'unavailable',
+    }).catch((err) => console.error('Failed to clear availability:', err))
   }
 
   function handleDateClick(date: string) {
+    if (!isLoggedIn) {
+      openAuthModal('register')
+      return
+    }
     setEditingDate(date)
   }
 
@@ -228,15 +276,15 @@ export function CalendarPage() {
   }
 
   function selectEveryone() {
-    setSelectedMemberIds(initialMembers.map((member) => member.id))
+    setSelectedMemberIds(members.map((member) => member.id))
   }
 
-  const allSelected = selectedMemberIds.length === initialMembers.length
+  const allSelected = selectedMemberIds.length === members.length
 
   return (
     <div className="calendar-page">
       <PageHeader
-        eyebrow={defaultGroupName}
+        eyebrow={groupName}
         title="Find your overlap"
         description={`${formatDateKey(startDate, { month: 'long', day: 'numeric' })} through ${formatDateKey(endDate, { month: 'long', day: 'numeric', year: 'numeric' })} · Eastern Time`}
         actions={
@@ -259,7 +307,7 @@ export function CalendarPage() {
           </button>
         </div>
         <div className="member-filters">
-          {initialMembers.map((member) => {
+          {members.map((member) => {
             const isSelected = selectedMemberIds.includes(member.id)
             return (
               <button
@@ -280,7 +328,11 @@ export function CalendarPage() {
             )
           })}
         </div>
-        <p className="member-filter-note">Friends will appear here after they join.</p>
+        <p className="member-filter-note">
+          {members.length <= 1
+            ? 'Friends will appear here after they join with your invite link.'
+            : 'Tap friends above to filter for shared time off.'}
+        </p>
         <div className="filter-row">
           <span className="legend-inline">
             <i className="legend-dot legend-dot--full" /> Fully available

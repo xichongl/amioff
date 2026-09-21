@@ -10,6 +10,7 @@ export interface Member {
   initials: string
   color: string
   isCurrentUser?: boolean
+  role?: 'owner' | 'member'
 }
 
 export interface AvailabilityEntry {

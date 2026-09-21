@@ -1,13 +1,15 @@
 import { ArrowLeft, CalendarHeart } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { PageHeader } from '../components/PageHeader'
-import { defaultGroupName } from '../lib/appDefaults'
+import { useAuth } from '../context/AuthContext'
 
 export function ShortlistPage() {
+  const { groupName } = useAuth()
+
   return (
     <div>
       <PageHeader
-        eyebrow={defaultGroupName}
+        eyebrow={groupName}
         title="Shared shortlist"
         description="Keep the promising dates in one place before the group decides."
       />

@@ -7,17 +7,19 @@ import {
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { Brand } from '../components/Brand'
-import { defaultGroupName } from '../lib/appDefaults'
+import { useAuth } from '../context/AuthContext'
 
 const exampleDays = ['12', '13', '14', '15', '16', '17', '18']
 
 export function LandingPage() {
+  const { currentUser, groupName, isLoggedIn } = useAuth()
+
   return (
     <div className="landing-page">
       <nav className="landing-nav">
         <Brand />
         <Link className="button button--quiet" to="/app/calendar">
-          Open preview <ArrowRight size={17} aria-hidden="true" />
+          {isLoggedIn && currentUser ? `Open calendar (${currentUser.name.split(' ')[0]})` : 'Open calendar'} <ArrowRight size={17} aria-hidden="true" />
         </Link>
       </nav>
 
@@ -37,11 +39,11 @@ export function LandingPage() {
             </p>
             <div className="hero__actions">
               <Link className="button button--primary button--large" to="/app/calendar">
-                Explore the working preview
+                {isLoggedIn && currentUser ? `Continue as ${currentUser.name}` : 'Open the calendar'}
                 <ArrowRight size={18} aria-hidden="true" />
               </Link>
               <span className="hero__note">
-                <Check size={16} aria-hidden="true" /> No account needed for this preview
+                <Check size={16} aria-hidden="true" /> Simple & private — sign in with your name & PIN
               </span>
             </div>
           </div>
@@ -51,10 +53,10 @@ export function LandingPage() {
             <div className="preview-window">
               <div className="preview-window__top">
                 <div>
-                  <span className="eyebrow">{defaultGroupName}</span>
+                  <span className="eyebrow">{groupName}</span>
                   <strong>Best days ahead</strong>
                 </div>
-                <span className="preview-badge">Empty state</span>
+                <span className="preview-badge">Live Planner</span>
               </div>
 
               <div className="mini-calendar">
