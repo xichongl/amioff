@@ -101,12 +101,16 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
       }
 
       const members = await getMembers(env.AMIOFF_DATA)
-      const target = members.find(
-        (m) => m.id === memberId || (rawName && m.name.toLowerCase() === rawName.toLowerCase())
-      )
+      let target = members.find((m) => m.id === memberId)
+      if (!target && rawName) {
+        target = members.find((m) => m.name.toLowerCase() === rawName.toLowerCase())
+      }
+      if (!target && members.length === 1) {
+        target = members[0]
+      }
 
       if (!target) {
-        return errorResponse('Member account not found. Please register first.')
+        return errorResponse('Member account not found. Please select your name or register first.')
       }
 
       const providedHash = await hashPin(rawPin)

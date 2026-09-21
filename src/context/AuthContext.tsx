@@ -21,7 +21,7 @@ interface AuthContextValue {
   openAuthModal: (mode?: 'register' | 'login') => void
   closeAuthModal: () => void
   register: (name: string, pin: string) => Promise<void>
-  login: (memberId: string, pin: string) => Promise<void>
+  login: (memberId: string, pin: string, name?: string) => Promise<void>
   logout: () => Promise<void>
   adminAddMember: (name: string, pin: string) => Promise<void>
   adminDeleteMember: (memberId: string) => Promise<void>
@@ -78,7 +78,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const openAuthModal = useCallback((mode: 'register' | 'login' = 'register') => {
     setAuthModalMode(mode)
     setIsAuthModalOpen(true)
-  }, [])
+    refreshAuth()
+  }, [refreshAuth])
 
   const closeAuthModal = useCallback(() => {
     setIsAuthModalOpen(false)
@@ -99,8 +100,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsAuthModalOpen(false)
   }, [])
 
-  const login = useCallback(async (memberId: string, pin: string) => {
-    const res = await api.login(memberId, pin)
+  const login = useCallback(async (memberId: string, pin: string, name?: string) => {
+    const res = await api.login(memberId, pin, name)
     const userWithCurrent = { ...res.user, isCurrentUser: true }
     setCurrentUser(userWithCurrent)
     if (res.members) {

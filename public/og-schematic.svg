@@ -1,0 +1,276 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <radialGradient id="glow-teal" cx="85%" cy="20%" r="65%">
+      <stop offset="0%" stop-color="#45C49A" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#181438" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow-amber" cx="15%" cy="85%" r="55%">
+      <stop offset="0%" stop-color="#F2B65B" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#181438" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="card-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#231F4B"/>
+      <stop offset="100%" stop-color="#1A163D"/>
+    </linearGradient>
+    <linearGradient id="match-col-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0F9F78" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#087157" stop-opacity="0.10"/>
+    </linearGradient>
+    <linearGradient id="pill-match" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0F9F78"/>
+      <stop offset="100%" stop-color="#45C49A"/>
+    </linearGradient>
+    <linearGradient id="brand-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#312E81"/>
+      <stop offset="100%" stop-color="#1E1B4B"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="1200" height="630" fill="#151230"/>
+  <rect width="1200" height="630" fill="url(#glow-teal)"/>
+  <rect width="1200" height="630" fill="url(#glow-amber)"/>
+
+  <!-- Subtle grid pattern -->
+  <g opacity="0.06" stroke="#FFFFFF" stroke-width="1">
+    <line x1="0" y1="90" x2="1200" y2="90"/>
+    <line x1="0" y1="180" x2="1200" y2="180"/>
+    <line x1="0" y1="270" x2="1200" y2="270"/>
+    <line x1="0" y1="360" x2="1200" y2="360"/>
+    <line x1="0" y1="450" x2="1200" y2="450"/>
+    <line x1="0" y1="540" x2="1200" y2="540"/>
+    <line x1="200" y1="0" x2="200" y2="630"/>
+    <line x1="400" y1="0" x2="400" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="800" y1="0" x2="800" y2="630"/>
+    <line x1="1000" y1="0" x2="1000" y2="630"/>
+  </g>
+
+  <!-- Brand Bar -->
+  <g transform="translate(64, 44)">
+    <!-- Logo Icon -->
+    <rect width="52" height="52" rx="15" fill="#26215F" stroke="#45C49A" stroke-width="2" stroke-opacity="0.4"/>
+    <path d="M13 30c0-10 6-17 14-17 7 0 13 5 13 13 0 8-5 14-13 14-4 0-8-2-10-5" stroke="#F7F5EF" stroke-width="5" stroke-linecap="round" fill="none"/>
+    <path d="M13 30h17" stroke="#45C49A" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="39" cy="15" r="3.5" fill="#F2B65B"/>
+
+    <!-- Brand Name -->
+    <text x="68" y="38" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="34" font-weight="900" fill="#FFFFFF" letter-spacing="-0.03em">amioff</text>
+
+    <!-- Category Pill -->
+    <rect x="200" y="8" width="220" height="34" rx="17" fill="#252152" stroke="#45C49A" stroke-width="1.2" stroke-opacity="0.5"/>
+    <circle cx="218" cy="25" r="4" fill="#45C49A"/>
+    <text x="232" y="31" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13.5" font-weight="700" fill="#E2F5EE" letter-spacing="0.02em">Group Availability Sync</text>
+  </g>
+
+  <!-- Left Column: Copy & Value Proposition -->
+  <g transform="translate(64, 138)">
+    <text x="0" y="38" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="36" font-weight="850" fill="#FFFFFF" letter-spacing="-0.03em">
+      Find the days your people
+    </text>
+    <text x="0" y="82" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="36" font-weight="850" fill="#45C49A" letter-spacing="-0.03em">
+      are off together.
+    </text>
+
+    <text x="0" y="132" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="17" font-weight="500" fill="#A8A4C8" line-height="1.5">
+      Coordinate days off with friends &amp; colleagues.
+    </text>
+    <text x="0" y="158" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="17" font-weight="500" fill="#A8A4C8">
+      No calendar clashes, no group text fatigue.
+    </text>
+
+    <!-- Key Feature Badges -->
+    <g transform="translate(0, 204)">
+      <rect x="0" y="0" width="168" height="42" rx="12" fill="#201C46" stroke="#36306E" stroke-width="1"/>
+      <circle cx="22" cy="21" r="5" fill="#45C49A"/>
+      <text x="36" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13.5" font-weight="700" fill="#FFFFFF">1-Click Days Off</text>
+
+      <rect x="180" y="0" width="188" height="42" rx="12" fill="#201C46" stroke="#36306E" stroke-width="1"/>
+      <circle cx="202" cy="21" r="5" fill="#F2B65B"/>
+      <text x="216" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13.5" font-weight="700" fill="#FFFFFF">Overlap Detection</text>
+    </g>
+
+    <g transform="translate(0, 260)">
+      <rect x="0" y="0" width="190" height="42" rx="12" fill="#201C46" stroke="#36306E" stroke-width="1"/>
+      <circle cx="22" cy="21" r="5" fill="#7E22CE"/>
+      <text x="36" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13.5" font-weight="700" fill="#FFFFFF">Private Group PINs</text>
+
+      <rect x="202" y="0" width="166" height="42" rx="12" fill="#201C46" stroke="#36306E" stroke-width="1"/>
+      <circle cx="224" cy="21" r="5" fill="#0369A1"/>
+      <text x="238" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13.5" font-weight="700" fill="#FFFFFF">Instant Sync</text>
+    </g>
+  </g>
+
+  <!-- Right Column: Interactive Schematic Diagram Card -->
+  <g transform="translate(540, 68)">
+    <!-- Card Container -->
+    <rect width="600" height="500" rx="24" fill="url(#card-grad)" stroke="#393375" stroke-width="1.5"/>
+
+    <!-- Schematic Header Bar -->
+    <path d="M0 24 C0 10.7 10.7 0 24 0 L576 0 C589.3 0 600 10.7 600 24 L600 64 L0 64 Z" fill="#2B265C"/>
+    <line x1="0" y1="64" x2="600" y2="64" stroke="#393375" stroke-width="1"/>
+    
+    <!-- Header Title -->
+    <text x="24" y="39" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" letter-spacing="0.04em">
+      SCHEMATIC OVERLAY
+    </text>
+    <rect x="205" y="20" width="125" height="26" rx="13" fill="#15803D" fill-opacity="0.35" stroke="#45C49A" stroke-width="1.2"/>
+    <circle cx="221" cy="33" r="3.5" fill="#45C49A"/>
+    <text x="231" y="37" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="800" fill="#45C49A" letter-spacing="0.04em">LIVE MATCH</text>
+
+    <!-- Days Columns -->
+    <!-- Column coordinates: Members (x: 20..140), Thu (140..225), Fri (225..310), Sat (310..450), Sun (450..585) -->
+
+    <!-- Shared Match Highlight Columns (Sat & Sun) -->
+    <rect x="312" y="65" width="134" height="345" fill="url(#match-col-grad)" stroke="#45C49A" stroke-width="1.5" stroke-opacity="0.8"/>
+    <rect x="450" y="65" width="134" height="345" fill="url(#match-col-grad)" stroke="#45C49A" stroke-width="1.5" stroke-opacity="0.8"/>
+
+    <!-- Day Headers -->
+    <g transform="translate(0, 65)">
+      <!-- Member Col -->
+      <text x="24" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="750" fill="#847FA6">MEMBER</text>
+      
+      <!-- Thu -->
+      <text x="156" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" fill="#847FA6">THU</text>
+      <text x="156" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="850" fill="#FFFFFF">19</text>
+
+      <!-- Fri -->
+      <text x="242" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" fill="#847FA6">FRI</text>
+      <text x="242" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="850" fill="#FFFFFF">20</text>
+
+      <!-- Sat (Match) -->
+      <rect x="316" y="6" width="126" height="48" rx="10" fill="#0F9F78" fill-opacity="0.3"/>
+      <text x="340" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="850" fill="#45C49A">SAT</text>
+      <text x="340" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="900" fill="#FFFFFF">21</text>
+      <text x="375" y="34" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="800" fill="#45C49A">★ OFF</text>
+
+      <!-- Sun (Match) -->
+      <rect x="454" y="6" width="126" height="48" rx="10" fill="#0F9F78" fill-opacity="0.3"/>
+      <text x="478" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="850" fill="#45C49A">SUN</text>
+      <text x="478" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="900" fill="#FFFFFF">22</text>
+      <text x="513" y="34" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="800" fill="#45C49A">★ OFF</text>
+
+      <line x1="0" y1="58" x2="600" y2="58" stroke="#393375" stroke-width="1"/>
+    </g>
+
+    <!-- Member Row 1: Andy Liu -->
+    <g transform="translate(0, 136)">
+      <circle cx="40" cy="24" r="16" fill="#4338CA"/>
+      <text x="40" y="29" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="850" fill="#FFFFFF" text-anchor="middle">AL</text>
+      <text x="66" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="750" fill="#FFFFFF">Andy</text>
+
+      <!-- Thu: Work -->
+      <rect x="144" y="10" width="60" height="28" rx="7" fill="#1C1844"/>
+      <text x="174" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#6B6696" text-anchor="middle">On</text>
+
+      <!-- Fri: Off -->
+      <rect x="230" y="10" width="60" height="28" rx="7" fill="#087157" fill-opacity="0.4" stroke="#0F9F78" stroke-width="1"/>
+      <text x="260" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="750" fill="#45C49A" text-anchor="middle">Off</text>
+
+      <!-- Sat: Off Match -->
+      <rect x="328" y="8" width="102" height="32" rx="8" fill="url(#pill-match)"/>
+      <text x="379" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="900" fill="#FFFFFF" text-anchor="middle">✓ OFF</text>
+
+      <!-- Sun: Off Match -->
+      <rect x="466" y="8" width="102" height="32" rx="8" fill="url(#pill-match)"/>
+      <text x="517" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="900" fill="#FFFFFF" text-anchor="middle">✓ OFF</text>
+
+      <line x1="16" y1="48" x2="584" y2="48" stroke="#312B63" stroke-width="1"/>
+    </g>
+
+    <!-- Member Row 2: Taylor M. -->
+    <g transform="translate(0, 196)">
+      <circle cx="40" cy="24" r="16" fill="#047857"/>
+      <text x="40" y="29" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="850" fill="#FFFFFF" text-anchor="middle">TM</text>
+      <text x="66" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="750" fill="#FFFFFF">Taylor</text>
+
+      <!-- Thu: Off -->
+      <rect x="144" y="10" width="60" height="28" rx="7" fill="#087157" fill-opacity="0.4" stroke="#0F9F78" stroke-width="1"/>
+      <text x="174" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="750" fill="#45C49A" text-anchor="middle">Off</text>
+
+      <!-- Fri: Work -->
+      <rect x="230" y="10" width="60" height="28" rx="7" fill="#1C1844"/>
+      <text x="260" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#6B6696" text-anchor="middle">On</text>
+
+      <!-- Sat: Off Match -->
+      <rect x="328" y="8" width="102" height="32" rx="8" fill="url(#pill-match)"/>
+      <text x="379" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="900" fill="#FFFFFF" text-anchor="middle">✓ OFF</text>
+
+      <!-- Sun: Off Match -->
+      <rect x="466" y="8" width="102" height="32" rx="8" fill="url(#pill-match)"/>
+      <text x="517" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="900" fill="#FFFFFF" text-anchor="middle">✓ OFF</text>
+
+      <line x1="16" y1="48" x2="584" y2="48" stroke="#312B63" stroke-width="1"/>
+    </g>
+
+    <!-- Member Row 3: Alex K. -->
+    <g transform="translate(0, 256)">
+      <circle cx="40" cy="24" r="16" fill="#0369A1"/>
+      <text x="40" y="29" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="850" fill="#FFFFFF" text-anchor="middle">AK</text>
+      <text x="66" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="750" fill="#FFFFFF">Alex</text>
+
+      <!-- Thu: Work -->
+      <rect x="144" y="10" width="60" height="28" rx="7" fill="#1C1844"/>
+      <text x="174" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#6B6696" text-anchor="middle">On</text>
+
+      <!-- Fri: Work -->
+      <rect x="230" y="10" width="60" height="28" rx="7" fill="#1C1844"/>
+      <text x="260" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#6B6696" text-anchor="middle">On</text>
+
+      <!-- Sat: Off Match -->
+      <rect x="328" y="8" width="102" height="32" rx="8" fill="url(#pill-match)"/>
+      <text x="379" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="900" fill="#FFFFFF" text-anchor="middle">✓ OFF</text>
+
+      <!-- Sun: Off Match -->
+      <rect x="466" y="8" width="102" height="32" rx="8" fill="url(#pill-match)"/>
+      <text x="517" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="900" fill="#FFFFFF" text-anchor="middle">✓ OFF</text>
+
+      <line x1="16" y1="48" x2="584" y2="48" stroke="#312B63" stroke-width="1"/>
+    </g>
+
+    <!-- Member Row 4: Sam R. -->
+    <g transform="translate(0, 316)">
+      <circle cx="40" cy="24" r="16" fill="#B45309"/>
+      <text x="40" y="29" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="850" fill="#FFFFFF" text-anchor="middle">SR</text>
+      <text x="66" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="750" fill="#FFFFFF">Sam</text>
+
+      <!-- Thu: Work -->
+      <rect x="144" y="10" width="60" height="28" rx="7" fill="#1C1844"/>
+      <text x="174" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#6B6696" text-anchor="middle">On</text>
+
+      <!-- Fri: Off -->
+      <rect x="230" y="10" width="60" height="28" rx="7" fill="#087157" fill-opacity="0.4" stroke="#0F9F78" stroke-width="1"/>
+      <text x="260" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="750" fill="#45C49A" text-anchor="middle">Off</text>
+
+      <!-- Sat: Off Match -->
+      <rect x="328" y="8" width="102" height="32" rx="8" fill="url(#pill-match)"/>
+      <text x="379" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="900" fill="#FFFFFF" text-anchor="middle">✓ OFF</text>
+
+      <!-- Sun: Off Match -->
+      <rect x="466" y="8" width="102" height="32" rx="8" fill="url(#pill-match)"/>
+      <text x="517" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="900" fill="#FFFFFF" text-anchor="middle">✓ OFF</text>
+    </g>
+
+    <!-- Schematic Bottom Banner: Match Result -->
+    <g transform="translate(20, 420)">
+      <rect width="560" height="60" rx="14" fill="#123B2F" stroke="#0F9F78" stroke-width="1.5"/>
+      <circle cx="36" cy="30" r="16" fill="#0F9F78"/>
+      <!-- Checkmark -->
+      <path d="M28 30 L34 36 L44 24" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      
+      <text x="64" y="27" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14.5" font-weight="850" fill="#E2F5EE">
+        Shared Weekend Off Found!
+      </text>
+      <text x="64" y="47" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12.5" font-weight="600" fill="#45C49A">
+        All 4 members are free together this Sat &amp; Sun
+      </text>
+    </g>
+  </g>
+
+  <!-- Bottom URL Pill -->
+  <g transform="translate(64, 538)">
+    <text x="0" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#6B6696" letter-spacing="0.05em">
+      AMIOFF.PAGES.DEV
+    </text>
+  </g>
+</svg>

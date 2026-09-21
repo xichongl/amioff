@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 import { KeyRound, LogIn, UserPlus, X, AlertCircle } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 
@@ -21,14 +21,36 @@ export function AuthModal() {
   const [error, setError] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
+  // Sync mode and reset state whenever modal is opened
+  useEffect(() => {
+    if (isAuthModalOpen) {
+      setMode(authModalMode)
+      setError(null)
+      setPin('')
+    }
+  }, [isAuthModalOpen, authModalMode])
+
+  // Keep selectedMemberId synchronized with real loaded members
+  useEffect(() => {
+    if (members.length > 0) {
+      if (!selectedMemberId || !members.some((m) => m.id === selectedMemberId)) {
+        setSelectedMemberId(members[0].id)
+      }
+    } else {
+      setSelectedMemberId('')
+    }
+  }, [members, selectedMemberId])
+
   if (!isAuthModalOpen) return null
 
   const handleModeChange = (newMode: 'register' | 'login') => {
     setMode(newMode)
     setError(null)
     setPin('')
-    if (newMode === 'login' && members.length > 0 && !selectedMemberId) {
-      setSelectedMemberId(members[0].id)
+    if (newMode === 'login' && members.length > 0) {
+      if (!selectedMemberId || !members.some((m) => m.id === selectedMemberId)) {
+        setSelectedMemberId(members[0].id)
+      }
     }
   }
 
@@ -39,29 +61,36 @@ export function AuthModal() {
 
     try {
       if (mode === 'register') {
-        if (!name.trim()) {
+        const trimmedName = name.trim()
+        const trimmedPin = pin.trim()
+        if (!trimmedName) {
           setError('Please enter your name.')
           setIsSubmitting(false)
           return
         }
-        if (pin.trim().length < 4) {
+        if (trimmedPin.length < 4) {
           setError('Please enter a passcode of at least 4 digits.')
           setIsSubmitting(false)
           return
         }
-        await register(name.trim(), pin.trim())
+        await register(trimmedName, trimmedPin)
       } else {
-        if (!selectedMemberId) {
+        const targetMember =
+          members.find((m) => m.id === selectedMemberId) ||
+          (members.length > 0 ? members[0] : null)
+
+        if (!targetMember) {
           setError('Please select your name.')
           setIsSubmitting(false)
           return
         }
-        if (!pin.trim()) {
+        const trimmedPin = pin.trim()
+        if (!trimmedPin) {
           setError('Please enter your passcode.')
           setIsSubmitting(false)
           return
         }
-        await login(selectedMemberId, pin.trim())
+        await login(targetMember.id, trimmedPin, targetMember.name)
       }
       setPin('')
       setName('')
@@ -177,7 +206,7 @@ export function AuthModal() {
                 <select
                   id="login-member"
                   className="input select"
-                  value={selectedMemberId}
+                  value={selectedMemberId || (members.length > 0 ? members[0].id : '')}
                   onChange={(e) => setSelectedMemberId(e.target.value)}
                   autoFocus
                   required

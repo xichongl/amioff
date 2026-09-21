@@ -86,10 +86,10 @@ export const api = {
     return res
   },
 
-  async login(memberId: string, pin: string): Promise<AuthActionResponse> {
+  async login(memberId: string, pin: string, name?: string): Promise<AuthActionResponse> {
     const res = await request<AuthActionResponse>('/api/auth', {
       method: 'POST',
-      body: JSON.stringify({ action: 'login', memberId, pin }),
+      body: JSON.stringify({ action: 'login', memberId, name, pin }),
     })
     if (res.token) {
       setStoredToken(res.token)
