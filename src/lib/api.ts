@@ -109,6 +109,20 @@ export const api = {
     }
   },
 
+  async adminAddMember(name: string, pin: string): Promise<{ success: boolean; member: Member; members: Member[] }> {
+    return request<{ success: boolean; member: Member; members: Member[] }>('/api/auth', {
+      method: 'POST',
+      body: JSON.stringify({ action: 'admin_add_member', name, pin }),
+    })
+  },
+
+  async adminDeleteMember(memberId: string): Promise<{ success: boolean; deletedMemberId: string; members: Member[] }> {
+    return request<{ success: boolean; deletedMemberId: string; members: Member[] }>('/api/auth', {
+      method: 'POST',
+      body: JSON.stringify({ action: 'admin_delete_member', memberId }),
+    })
+  },
+
   async getAvailability(): Promise<{ entries: AvailabilityEntry[] }> {
     return request<{ entries: AvailabilityEntry[] }>('/api/availability')
   },

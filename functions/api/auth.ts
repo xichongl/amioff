@@ -9,6 +9,7 @@ import {
   hashPin,
   jsonResponse,
   pickColor,
+  removeMemberAvailability,
   saveMembers,
   toPublicMember,
 } from './_utils'
@@ -135,6 +136,92 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
       }
 
       return jsonResponse({ success: true })
+    }
+
+    if (action === 'admin_add_member') {
+      const caller = await getAuthenticatedMember(request, env.AMIOFF_DATA)
+      const members = await getMembers(env.AMIOFF_DATA)
+      const isOwner = caller?.role === 'owner' || members.length <= 1
+      if (!isOwner) {
+        return errorResponse('Only the group owner can add new members directly.', 403)
+      }
+
+      const rawName = (body.name || '').trim()
+      const rawPin = (body.pin || '').trim()
+
+      if (rawName.length < 2 || rawName.length > 40) {
+        return errorResponse('Name must be between 2 and 40 characters.')
+      }
+
+      if (rawPin.length < 4 || rawPin.length > 20) {
+        return errorResponse('Passcode must be at least 4 digits or characters.')
+      }
+
+      const existing = members.find(
+        (m) => m.name.toLowerCase() === rawName.toLowerCase()
+      )
+      if (existing) {
+        return errorResponse(`A member named "${rawName}" already exists.`)
+      }
+
+      const pinHash = await hashPin(rawPin)
+      const id = `m_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`
+      const newMember: StoredMember = {
+        id,
+        name: rawName,
+        initials: getInitials(rawName),
+        color: pickColor(members.length),
+        pinHash,
+        role: 'member',
+        createdAt: new Date().toISOString(),
+      }
+
+      const updatedMembers = [...members, newMember]
+      await saveMembers(env.AMIOFF_DATA, updatedMembers)
+
+      return jsonResponse({
+        success: true,
+        member: toPublicMember(newMember),
+        members: updatedMembers.map(toPublicMember),
+      })
+    }
+
+    if (action === 'admin_delete_member') {
+      const caller = await getAuthenticatedMember(request, env.AMIOFF_DATA)
+      const members = await getMembers(env.AMIOFF_DATA)
+      const isOwner = caller?.role === 'owner' || members.length <= 1
+      if (!isOwner) {
+        return errorResponse('Only the group owner can remove members.', 403)
+      }
+
+      const memberIdToDelete = (body.memberId || '').trim()
+      if (!memberIdToDelete) {
+        return errorResponse('Member ID is required for deletion.')
+      }
+
+      if (caller && caller.id === memberIdToDelete) {
+        return errorResponse('The group owner cannot delete their own account.', 400)
+      }
+
+      const target = members.find((m) => m.id === memberIdToDelete)
+      if (!target) {
+        return errorResponse('Member not found.', 404)
+      }
+
+      if (target.role === 'owner') {
+        return errorResponse('Group owner cannot be removed.', 400)
+      }
+
+      const remainingMembers = members.filter((m) => m.id !== memberIdToDelete)
+      await saveMembers(env.AMIOFF_DATA, remainingMembers)
+
+      await removeMemberAvailability(env.AMIOFF_DATA, memberIdToDelete)
+
+      return jsonResponse({
+        success: true,
+        deletedMemberId: memberIdToDelete,
+        members: remainingMembers.map(toPublicMember),
+      })
     }
 
     return errorResponse(`Unknown action: ${action}`)

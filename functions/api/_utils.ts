@@ -140,3 +140,29 @@ export async function getAuthenticatedMember(
   return members.find((m) => m.id === memberId) || null
 }
 
+export async function removeMemberAvailability(
+  kv: KVNamespace,
+  memberId: string
+): Promise<void> {
+  const raw = await kv.get('availability:map')
+  if (!raw) return
+  try {
+    const map = JSON.parse(raw) as GroupAvailabilityMap
+    let changed = false
+    for (const date of Object.keys(map)) {
+      if (map[date] && map[date][memberId]) {
+        delete map[date][memberId]
+        changed = true
+        if (Object.keys(map[date]).length === 0) {
+          delete map[date]
+        }
+      }
+    }
+    if (changed) {
+      await kv.put('availability:map', JSON.stringify(map))
+    }
+  } catch {
+    // Ignore JSON errors
+  }
+}
+

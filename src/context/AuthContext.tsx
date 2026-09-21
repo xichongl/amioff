@@ -23,6 +23,8 @@ interface AuthContextValue {
   register: (name: string, pin: string) => Promise<void>
   login: (memberId: string, pin: string) => Promise<void>
   logout: () => Promise<void>
+  adminAddMember: (name: string, pin: string) => Promise<void>
+  adminDeleteMember: (memberId: string) => Promise<void>
   refreshAuth: () => Promise<void>
 }
 
@@ -123,6 +125,30 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     )
   }, [])
 
+  const adminAddMember = useCallback(async (name: string, pin: string) => {
+    const res = await api.adminAddMember(name, pin)
+    if (res.members) {
+      setMembers(
+        res.members.map((m) => ({
+          ...m,
+          isCurrentUser: currentUser ? m.id === currentUser.id : false,
+        }))
+      )
+    }
+  }, [currentUser])
+
+  const adminDeleteMember = useCallback(async (memberId: string) => {
+    const res = await api.adminDeleteMember(memberId)
+    if (res.members) {
+      setMembers(
+        res.members.map((m) => ({
+          ...m,
+          isCurrentUser: currentUser ? m.id === currentUser.id : false,
+        }))
+      )
+    }
+  }, [currentUser])
+
   const isLoggedIn = currentUser !== null || getStoredToken() !== null
 
   return (
@@ -140,6 +166,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         register,
         login,
         logout,
+        adminAddMember,
+        adminDeleteMember,
         refreshAuth,
       }}
     >
