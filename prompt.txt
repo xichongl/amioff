@@ -1,0 +1,6 @@
+Your task is to help me create a webapp that helps my friends and I in medical residency figure out a common time off to spend time together.
+Please ask me clarifying questions and design choice questions to create an implementation plan first.
+The webapp should be able to allow an user to create an account with their name and input their days off in a simple and intuitive way for the rest of the calendar year.
+Once multiple users have their information submitted, users should be able to see days where most of their friends have days off highlighted. They can also select specific friends and find common days off with them. 
+I'm open to suggestions for additional functionality.
+The webapp should be deployed via Github. Please use a modern and professsioanl design for the webapp.

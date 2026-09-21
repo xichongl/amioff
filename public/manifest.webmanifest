@@ -1,0 +1,20 @@
+{
+  "id": "/",
+  "name": "Amioff",
+  "short_name": "Amioff",
+  "description": "Find the days when your people are off together.",
+  "theme_color": "#26215f",
+  "background_color": "#f7f5ef",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/brand-mark.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
+
